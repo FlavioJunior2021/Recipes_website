@@ -2,12 +2,13 @@
 type ButtonProps = {
 	children: React.ReactNode
 	isLoading: boolean
+	type: "button" | "submit" | "reset" | undefined
 }
 
-export function Button({ children, isLoading }: ButtonProps){
+export function Button({ children, isLoading, type }: ButtonProps){
 	return(
-		<div className="navbar-end">
-			<button type="button" disabled={isLoading} className="text-span gap-4 bg-blue-400 hover:bg-blue-300 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+		<div className="w-full">
+			<button type={type} disabled={isLoading} className={`text-span gap-4 justify-center w-full bg-blue-400 hover:bg-blue-300 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm text-white px-5 py-2.5 text-center inline-flex items-center ${isLoading ? 'btn-disabled	' : ''}`}>
 				{children}
 				{isLoading && <span className="loading loading-spinner loading-xs"></span>}
 			</button>

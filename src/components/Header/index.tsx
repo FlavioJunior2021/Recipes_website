@@ -1,9 +1,24 @@
-import Image from 'next/image';
-import logo from '../../../public/logo.svg'
-import { Button } from '../Button';
-import Link from 'next/link';
+"use client";
+
+import Image from "next/image";
+import logo from "../../../public/logo.svg";
+import Link from "next/link";
+import { GetUser } from "@/lib/auth";
+import { useState, useEffect } from 'react';
 
 export function Header() {
+	const [user, setUser] = useState(GetUser());
+
+	useEffect(() => {
+		setUser(GetUser());
+	}, [user]);
+
+	const { username, admin } = user;
+	
+	function getOut(){
+		localStorage.removeItem('token')
+	}
+
 	return (
 		<div className="navbar bg-base-100 text-body">
 			<div className="navbar-start">
@@ -29,7 +44,7 @@ export function Header() {
 						className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
 					>
 						<li>
-							<a>Home</a>
+							<a href="/">Home</a>
 						</li>
 						<li>
 							<a>Recipes</a>
@@ -37,33 +52,48 @@ export function Header() {
 						<li>
 							<a>Account</a>
 						</li>
+						{admin && (
+							<>
+								<li>
+									<a>Users List</a>
+								</li>
+								<li>
+									<a>Recipes List</a>
+								</li>
+							</>
+						)}
 					</ul>
 				</div>
 				<a className="btn btn-ghost normal-case text-xl">
-					<Image 
-						src={logo}
-						width={110}
-						height={30}
-						alt='logo'
-					/>
+					<Image src={logo} width={110} height={30} alt="logo-img" />
 				</a>
 			</div>
 			<div className="navbar-center hidden lg:flex">
 				<ul className="menu menu-horizontal px-1">
-						<li>
-							<a>Home</a>
-						</li>
-						<li>
-							<a>Recipes</a>
-						</li>
-						<li>
-							<a>Account</a>
-						</li>
+					<li>
+						<a href="/">Home</a>
+					</li>
+					<li>
+						<a href="/recipes">Recipes</a>
+					</li>
+					<li>
+						<a>Account</a>
+					</li>
+					{admin && (
+						<>
+							<li>
+								<a>Users List</a>
+							</li>
+							<li>
+								<a>Recipes List</a>
+							</li>
+						</>
+					)}
 				</ul>
 			</div>
-			<Button isLoading={false}>
-				<Link href="/login">login to continue</Link>
-			</Button>
+			<span className="navbar-end text-span hover:text-blue-400">
+				{username === "Guest" ? <a href="/login">login to continue</a> : <button onClick={getOut}>Sair</button>}
+			</span>
 		</div>
 	);
 }
