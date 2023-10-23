@@ -20,10 +20,11 @@ export default function Login() {
 		setLoading(true);
 		e.preventDefault();
 		const formData = new FormData(e.currentTarget);
+		let email = formData.get("email") as string
 
 		try {
 			const response = await api.post("/auth", {
-				email: formData.get("email"),
+				email: email.toLowerCase(),
 				password: formData.get("password"),
 			});
 			const { token } = response.data;
