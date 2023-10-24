@@ -14,8 +14,8 @@ export function RecipeCard({recipe, isLoading}: RecipeCardProps){
 		)
 	}
 	return(
-		<a href={`/recipe/${recipe.id}`} className="w-[400] h-[430] flex flex-col gap-3 bg-zinc-100 hover:bg-zinc-200 p-2 rounded-md">
-			<Image 
+		<a href={`/recipes/${recipe.id}`} className="w-[400] h-[430] flex flex-col gap-3 bg-zinc-100 hover:bg-zinc-200 p-2 rounded-md">
+			<img 
 				src={recipe.coverURL}
 				alt="food image"
 				width={260}
