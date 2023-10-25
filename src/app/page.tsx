@@ -8,7 +8,6 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { Recipe } from "@/types/recipe";
 import { RecipeCard } from "@/components/RecipeCard";
-import { Footer } from "@/components/Footer";
 
 const categories = [
 	{ icon: "🌱", name: "Vegan", id: "fcce4fb2-5368-4a39-9dbd-9d3951f58e71" },
@@ -92,7 +91,6 @@ export default function Home() {
 					<RecipeCard key={index} recipe={recipe} isLoading={loading} />
 				))}
 			</div>
-			<Footer />
 		</div>
 	);
 }
