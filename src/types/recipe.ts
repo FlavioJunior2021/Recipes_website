@@ -5,4 +5,5 @@ export interface Recipe {
 	tags: string;
 	title: string;
 	id: string;
+	userId: string;
 }

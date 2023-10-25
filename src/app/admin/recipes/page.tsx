@@ -42,6 +42,7 @@ export default function Recipes() {
 					Authorization: `Bearer ${token}`
 				}
 			})
+			window.alert("Recipe deleted successfully")
 			setRecipes(recipes.filter(recipe => recipe.id !== recipeId))
 		} catch (err) {
 			window.alert(err)

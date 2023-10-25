@@ -5,6 +5,7 @@ type User = {
 	email: string;
 	sub: string;
 	admin: boolean;
+	id: string;
 };
 export function GetUser(): User {
 	const token = localStorage.getItem("token") as string;
@@ -22,7 +23,8 @@ export function GetUser(): User {
 			username: 'Guest',
 			email: '',
 			sub: '',
-			admin: false
+			admin: false,
+			id: ''
 		}
 	}
 

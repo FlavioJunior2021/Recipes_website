@@ -7,17 +7,16 @@ import { FormEvent, useState } from "react";
 import { api } from "@/lib/api";
 
 const categories = [
-	{ icon: "🌱", name: "Vegan", id: "fcce4fb2-5368-4a39-9dbd-9d3951f58e71" },
-	{ icon: "🥩", name: "Meat", id: "aa2b0152-3362-40b0-861a-58576e8b67ef" },
-	{ icon: "🍣", name: "Seafood", id: "a5d767e0-3a69-4fb8-92ae-b7ef39c2589c" },
-	{ icon: "🥗", name: "Salad", id: "6222a6ae-e4a1-44e7-b53e-81d636943bf1" },
-	{ icon: "🍔", name: "Burgers", id: "e65a385c-7cc5-4e4e-9343-5d1908eb3b0f" },
+	{ icon: "🌱", name: "Vegan", id: "4c164c6a-dad3-4249-a617-10d7292bc24a" },
+	{ icon: "🥩", name: "Meat", id: "81232146-4211-436f-8fed-63b95854878c" },
+	{ icon: "🍣", name: "Seafood", id: "8254821e-c67b-4277-bd08-bafbb5f55ae2" },
+	{ icon: "🥗", name: "Salad", id: "89ec1a1c-801f-482e-b754-7a4d04f24ce5" },
+	{ icon: "🍔", name: "Burgers", id: "955d6928-0955-4277-aa4e-85a4d56daf77" },
 ];
 
 export default function New() {
 	const router = useRouter();
 	const [loading, setLoading] = useState(false);
-	const [previewImage, setPreviewImage] = useState();
 	const token = localStorage.getItem("token") as string;
 
 	if (!token) {
@@ -50,24 +49,28 @@ export default function New() {
 
 		console.log(title, instructions, ingredients, category, tags, coverURL);
 
-		await api.post(
-			"/recipe",
-			{
-				coverURL: coverURL,
-				title: title,
-				instructions: instructions,
-				ingredients: ingredients,
-				categoryId: category,
-				tags: tags,
-			},
-			{
-				headers: {
-					Authorization: `Bearer ${token}`,
+		try {
+			await api.post(
+				"/recipe",
+				{
+					coverURL: coverURL,
+					title: title,
+					instructions: instructions,
+					ingredients: ingredients,
+					categoryId: category,
+					tags: tags,
 				},
-			}
-		);
-		setLoading(false);
-		window.alert("Receita cadastrada");
+				{
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				}
+			);
+			setLoading(false);
+			window.alert("Receita cadastrada");
+		} catch (err) {
+			window.alert("Erro ao cadastrar" + err)
+		}
 	}
 
 	return (

@@ -45,7 +45,7 @@ export default function RecipeId({ params }: getRecipeByIdProps) {
 			window.alert("Recipe Deleted");
 		} catch (err) {
 			window.alert(err);
-			setLoading(false)
+			setLoading(false);
 		}
 	}
 
@@ -78,7 +78,9 @@ export default function RecipeId({ params }: getRecipeByIdProps) {
 					<div key={index} className="flex flex-col gap-10">
 						<h2 className="text-2xl font-semibold text-body">{recipe.title}</h2>
 						<div>
-							<h4 className="text-lg font-semibold text-body text-justify">Ingredients</h4>
+							<h4 className="text-lg font-semibold text-body text-justify">
+								Ingredients
+							</h4>
 							<p>{recipe.ingredients}</p>
 						</div>
 						<div className="flex flex-col w-96 h-full pb-2">
