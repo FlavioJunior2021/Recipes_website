@@ -59,14 +59,14 @@ export default function RecipeId({ params }: getRecipeByIdProps) {
 			className="flex w-full h-screen content-center pt-2"
 			onSubmit={handleDeletRecipe}
 		>
-			<div className="grid h-full flex-grow card rounded-box place-items-center">
+			<div className="pl-5 pb-2">
 				{recipe.map((recipe, index) => (
-					<div key={index}>
+					<div key={index} className="">
 						<figure>
 							<img
 								src={recipe.coverURL}
 								alt="recipe"
-								className="w-96 h-96 rounded-md"
+								className="w-full grid h-screen flex-grow card rounded-box place-items-center"
 							/>
 						</figure>
 					</div>
@@ -76,9 +76,15 @@ export default function RecipeId({ params }: getRecipeByIdProps) {
 			<div className="grid h-full flex-grow card rounded-box place-items-start">
 				{recipe.map((recipe, index) => (
 					<div key={index} className="flex flex-col gap-10">
-						<h2 className="">{recipe.title}</h2>
-						<p>{recipe.ingredients}</p>
-						<p>{recipe.instructions}</p>
+						<h2 className="text-2xl font-semibold text-body">{recipe.title}</h2>
+						<div>
+							<h4 className="text-lg font-semibold text-body text-justify">Ingredients</h4>
+							<p>{recipe.ingredients}</p>
+						</div>
+						<div className="flex flex-col w-96 h-full pb-2">
+							<h4 className="text-lg font-semibold text-body">Instructions</h4>
+							<p>{recipe.instructions}</p>
+						</div>
 					</div>
 				))}
 				{admin && (
