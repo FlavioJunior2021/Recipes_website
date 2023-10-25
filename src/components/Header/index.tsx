@@ -55,7 +55,7 @@ export function Header() {
 						{admin && (
 							<>
 								<li>
-									<a>Users List</a>
+									<a href="/admin/users">Users List</a>
 								</li>
 								<li>
 									<a>Recipes List</a>
@@ -82,7 +82,7 @@ export function Header() {
 					{admin && (
 						<>
 							<li>
-								<a>Users List</a>
+								<a href="/admin/users">Users List</a>
 							</li>
 							<li>
 								<a>Recipes List</a>

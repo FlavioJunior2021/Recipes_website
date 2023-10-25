@@ -45,6 +45,7 @@ export default function RecipeId({ params }: getRecipeByIdProps) {
 			window.alert("Recipe Deleted");
 		} catch (err) {
 			window.alert(err);
+			setLoading(false)
 		}
 	}
 
