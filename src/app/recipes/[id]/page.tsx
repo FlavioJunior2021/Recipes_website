@@ -66,7 +66,7 @@ export default function RecipeId({ params }: getRecipeByIdProps) {
 							<img
 								src={recipe.coverURL}
 								alt="recipe"
-								className="w-full grid h-screen flex-grow card rounded-box place-items-center"
+								className="w-[500px] grid h-[500px] flex-grow card rounded-box place-items-center"
 							/>
 						</figure>
 					</div>

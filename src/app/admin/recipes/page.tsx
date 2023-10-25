@@ -2,11 +2,11 @@
 
 import { api } from "@/lib/api";
 import { GetUser } from "@/lib/auth";
-import { User } from "@/types/user";
-import { useRouter } from "next/navigation";
+import { Recipe } from "@/types/recipe";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
-export default function Users() {
+export default function Recipes() {
 	const router = useRouter()
 	const { sub } = GetUser();
 
@@ -14,35 +14,35 @@ export default function Users() {
 		router.push("/");
 	}
 
-	const [users, setUsers] = useState<User[]>([])
+	const [recipes, setRecipes] = useState<Recipe[]>([])
 
 	useEffect(() => {
-		async function getUsers() {
+		async function getRecipes() {
 			try {
 				const token = localStorage.getItem("token") as string
-				const res = await api.get("/admin/users", {
+				const res = await api.get("/recipes", {
 					headers: {
 						Authorization: `Bearer ${token}`
 					}
 				})
-				setUsers(res.data)
+				setRecipes(res.data)
 			} catch (err) {
 				window.alert(err)
 			}
 		}
 
-		getUsers()
+		getRecipes()
 	}, [])
 
-	async function handleDeleteUser(userId: string) {
+	async function handleDeleteRecipe(recipeId: string) {
 		try {
 			const token = localStorage.getItem("token") as string
-			await api.delete(`/admin/${userId}/user`, {
+			await api.delete(`/recipe/${recipeId}`, {
 				headers: {
 					Authorization: `Bearer ${token}`
 				}
 			})
-			setUsers(users.filter(user => user.id !== userId))
+			setRecipes(recipes.filter(recipe => recipe.id !== recipeId))
 		} catch (err) {
 			window.alert(err)
 		}
@@ -55,20 +55,18 @@ export default function Users() {
 				<thead>
 					<tr>
 						<th>Id</th>
-						<th>Name</th>
-						<th>Email</th>
-						<th>Admin</th>
+						<th>Title</th>
+						<th>Ingredients</th>
 						<th>Actions</th>
 					</tr>
 				</thead>
 				<tbody>
-					{users.map((user, index) => (
+					{recipes.map((recipe, index) => (
 						<tr key={index}>
-							<th>{user.id}</th>
-							<td>{user.username}</td>
-							<td>{user.email}</td>
-							<td>{user.isAdmin ? 'Yes' : 'No'}</td>
-							<td><button type="button" onClick={() => handleDeleteUser(user.id)} className="btn-md bg-transparent text-red-600 hover:text-red-700">Delete</button></td>
+							<th>{recipe.id}</th>
+							<td>{recipe.title}</td>
+							<td>{recipe.ingredients.split(',')}</td>
+							<td><button type="button" onClick={() => handleDeleteRecipe(recipe.id)} className="btn-md bg-transparent text-red-600 hover:text-red-700">Delete</button></td>
 						</tr>
 					))}
 				</tbody>

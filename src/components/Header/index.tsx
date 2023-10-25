@@ -58,7 +58,7 @@ export function Header() {
 									<a href="/admin/users">Users List</a>
 								</li>
 								<li>
-									<a>Recipes List</a>
+									<a href="/admin/recipes">Recipes List</a>
 								</li>
 							</>
 						)}
@@ -85,7 +85,7 @@ export function Header() {
 								<a href="/admin/users">Users List</a>
 							</li>
 							<li>
-								<a>Recipes List</a>
+								<a href="/admin/recipes">Recipes List</a>
 							</li>
 						</>
 					)}

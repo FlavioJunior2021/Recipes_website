@@ -29,7 +29,7 @@ export function Hero() {
 						Log in to post your recipes
 					</a>
 				) : (
-					<p className="mt-2 text-span hover:text-blue-400">Bem vindo {username}</p>
+					<p className="mt-2 text-span hover:text-blue-400">Welcome {username}</p>
 				)}
 			</div>
 			<div>
