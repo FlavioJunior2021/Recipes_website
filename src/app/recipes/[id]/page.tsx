@@ -18,7 +18,7 @@ export default function RecipeId({ params }: getRecipeByIdProps) {
 	const [loading, setLoading] = useState(false);
 	const router = useRouter();
 
-	const { admin } = user;
+	const { admin, id } = user;
 
 	async function getRecipeById() {
 		try {
@@ -52,6 +52,7 @@ export default function RecipeId({ params }: getRecipeByIdProps) {
 	useEffect(() => {
 		getRecipeById();
 		setUser(GetUser);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [params.id]);
 
 	return (
