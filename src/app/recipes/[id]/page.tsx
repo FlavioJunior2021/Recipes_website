@@ -30,34 +30,29 @@ export default function RecipeId({ params }: getRecipeByIdProps) {
 		}
 	}
 
-	async function handleDeletRecipe(e: FormEvent<HTMLFormElement>) {
-		setLoading(true);
-		e.preventDefault();
+	async function handleDeleteRecipe(recipeId: string) {
 		try {
-			const token = localStorage.getItem("token") as string;
-			await api.delete(`/recipe/${params.id}`, {
+			const token = localStorage.getItem("token") as string
+			await api.delete(`/recipe/${recipeId}`, {
 				headers: {
-					Authorization: `Bearer ${token}`,
-				},
-			});
-			setLoading(false);
-			router.push("/recipes");
-			window.alert("Recipe Deleted");
+					Authorization: `Bearer ${token}`
+				}
+			})
+			window.alert("Recipe deleted successfully")
+			setRecipe(recipe.filter(recipe => recipe.id !== recipeId))
 		} catch (err) {
-			window.alert(err);
-			setLoading(false);
+			window.alert(err)
 		}
 	}
 
 	useEffect(() => {
 		getRecipeById();
-		setUser(GetUser);
+		setUser(GetUser());
 	}, [params.id]);
 
 	return (
 		<form
 			className="flex w-full h-screen content-center pt-2"
-			onSubmit={handleDeletRecipe}
 		>
 			<div className="pl-5 pb-2">
 				{recipe.map((recipe, index) => (
@@ -89,11 +84,12 @@ export default function RecipeId({ params }: getRecipeByIdProps) {
 						</div>
 					</div>
 				))}
-				{admin && (
-					<Button isLoading={loading} type="submit">
+				{recipe.map((recipe, index) => (
+					admin &&
+					<button key={index} className="btn-error p-2 rounded-md" onClick={() => handleDeleteRecipe(recipe.id)}>
 						Delete
-					</Button>
-				)}
+					</button>
+				))}
 			</div>
 		</form>
 	);
