@@ -39,7 +39,7 @@ export default function RecipeId({ params }: getRecipeByIdProps) {
 				}
 			})
 			window.alert("Recipe deleted successfully")
-			setRecipe(recipe.filter(recipe => recipe.id !== recipeId))
+			router.push("/recipes")
 		} catch (err) {
 			window.alert(err)
 		}
@@ -48,6 +48,8 @@ export default function RecipeId({ params }: getRecipeByIdProps) {
 	useEffect(() => {
 		getRecipeById();
 		setUser(GetUser());
+		console.log(recipe)
+		console.log(user.id)
 	}, [params.id]);
 
 	return (
@@ -72,24 +74,31 @@ export default function RecipeId({ params }: getRecipeByIdProps) {
 				{recipe.map((recipe, index) => (
 					<div key={index} className="flex flex-col gap-10">
 						<h2 className="text-2xl font-semibold text-body">{recipe.title}</h2>
-						<div>
+						<div className="flex flex-col w-96 h-full pb-2 justify-center">
 							<h4 className="text-lg font-semibold text-body text-justify">
 								Ingredients
 							</h4>
 							<p>{recipe.ingredients}</p>
 						</div>
-						<div className="flex flex-col w-96 h-full pb-2">
+						<div className="flex flex-col w-96 h-full pb-2 justify-center">
 							<h4 className="text-lg font-semibold text-body">Instructions</h4>
 							<p>{recipe.instructions}</p>
 						</div>
 					</div>
 				))}
-				{recipe.map((recipe, index) => (
-					admin &&
-					<button key={index} className="btn-error p-2 rounded-md" onClick={() => handleDeleteRecipe(recipe.id)}>
-						Delete
-					</button>
-				))}
+				<div className="flex flex-row gap-2">
+					{recipe.map((recipe, index) => (
+						admin &&
+						<button key={index} className="btn-error p-2 rounded-md" onClick={() => handleDeleteRecipe(recipe.id)}>
+							Delete
+						</button>
+					))}
+					{recipe.map((recipe, a) => (
+						<button key={a} className="btn-warning p-2 rounded-md">
+							{(recipe.userId == user.id) ? "Atualize" : ""}
+						</button>
+					))}
+				</div>
 			</div>
 		</form>
 	);
