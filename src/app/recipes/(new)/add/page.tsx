@@ -5,6 +5,7 @@ import { FilePicker } from "@/components/FilerPicker";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 import { api } from "@/lib/api";
+import { GetUser } from "@/lib/auth";
 
 const categories = [
 	{ icon: "🌱", name: "Vegan", id: "4c164c6a-dad3-4249-a617-10d7292bc24a" },
@@ -14,10 +15,12 @@ const categories = [
 	{ icon: "🍔", name: "Burgers", id: "955d6928-0955-4277-aa4e-85a4d56daf77" },
 ];
 
+
 export default function New() {
 	const router = useRouter();
 	const [loading, setLoading] = useState(false);
 	const token = localStorage.getItem("token") as string;
+	const { id } = GetUser()
 
 	if (!token) {
 		router.push("/");
@@ -59,6 +62,7 @@ export default function New() {
 					ingredients: ingredients,
 					categoryId: category,
 					tags: tags,
+					userId: id,
 				},
 				{
 					headers: {

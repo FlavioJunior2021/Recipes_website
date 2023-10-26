@@ -91,7 +91,7 @@ export function Header() {
 					)}
 				</ul>
 			</div>
-			<span className="navbar-end text-span hover:text-blue-400">
+			<span className="navbar-end text-span hover:text-blue-400 pr-4">
 				{username === "Guest" ? <a href="/auth/login">login to continue</a> : <button onClick={getOut}>Sair</button>}
 			</span>
 		</div>

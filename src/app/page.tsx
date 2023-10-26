@@ -17,6 +17,7 @@ const categories = [
 	{ icon: "🍔", name: "Burgers", id: "955d6928-0955-4277-aa4e-85a4d56daf77" },
 ];
 
+
 async function getRecipesByCategorie(id: string): Promise<Recipe[]> {
 	const res = await api.get(`/category/${id}/recipes`);
 	return res.data;
