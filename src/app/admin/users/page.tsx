@@ -54,7 +54,6 @@ export default function Users() {
 				{/* head */}
 				<thead>
 					<tr>
-						<th>Id</th>
 						<th>Name</th>
 						<th>Email</th>
 						<th>Admin</th>
@@ -64,7 +63,6 @@ export default function Users() {
 				<tbody>
 					{users.map((user, index) => (
 						<tr key={index}>
-							<th>{user.id}</th>
 							<td>{user.username}</td>
 							<td>{user.email}</td>
 							<td>{user.isAdmin ? 'Yes' : 'No'}</td>

@@ -55,7 +55,6 @@ export default function Recipes() {
 				{/* head */}
 				<thead>
 					<tr>
-						<th>Id</th>
 						<th>Title</th>
 						<th>Ingredients</th>
 						<th>Actions</th>
@@ -64,7 +63,6 @@ export default function Recipes() {
 				<tbody>
 					{recipes.map((recipe, index) => (
 						<tr key={index}>
-							<th>{recipe.id}</th>
 							<td>{recipe.title}</td>
 							<td>{recipe.ingredients.split(',')}</td>
 							<td><button type="button" onClick={() => handleDeleteRecipe(recipe.id)} className="btn-md bg-transparent text-red-600 hover:text-red-700">Delete</button></td>

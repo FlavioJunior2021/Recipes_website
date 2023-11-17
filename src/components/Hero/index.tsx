@@ -25,7 +25,7 @@ export function Hero() {
 					Create an account and join the community, post your dishes now!
 				</span>
 				{username === "Guest" ? (
-					<a href="/login" className="mt-10 text-span hover:text-blue-400">
+					<a href="/auth/login" className="mt-10 text-span hover:text-blue-400">
 						Log in to post your recipes
 					</a>
 				) : (

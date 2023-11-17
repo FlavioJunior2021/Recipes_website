@@ -54,21 +54,25 @@ export default function RecipeId({ params }: getRecipeByIdProps) {
 
 		// Aqui você pode obter os valores atualizados dos inputs.
 		// Certifique-se de ter um estado separado para cada input (título, ingredientes, instruções)
-		const updatedTitle = formData.get("title")
-		const updatedIngredients = formData.get("ingredients")
-		const updatedInstructions = formData.get("instructions")
-	
+		const updatedTitle = formData.get("title");
+		const updatedIngredients = formData.get("ingredients");
+		const updatedInstructions = formData.get("instructions");
+
 		try {
 			const token = localStorage.getItem("token") as string;
-			await api.put(`/recipe/${params.id}`, {
-				title: updatedTitle,
-				ingredients: updatedIngredients,
-				instructions: updatedInstructions
-			}, {
-				headers: {
-					Authorization: `Bearer ${token}`,
+			await api.put(
+				`/recipe/${params.id}`,
+				{
+					title: updatedTitle,
+					ingredients: updatedIngredients,
+					instructions: updatedInstructions,
 				},
-			});
+				{
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				}
+			);
 			window.alert("Recipe updated successfully");
 			router.push("/recipes");
 		} catch (err) {
@@ -82,7 +86,10 @@ export default function RecipeId({ params }: getRecipeByIdProps) {
 	}, [params.id]);
 
 	return (
-		<form className="flex w-full h-screen content-center pt-2" onSubmit={handleAtualizeRecipe}>
+		<form
+			className="flex w-full h-screen content-center pt-2"
+			onSubmit={handleAtualizeRecipe}
+		>
 			<div className="pl-5 pb-2">
 				{recipe.map((recipe, index) => (
 					<div key={index} className="">
@@ -106,6 +113,7 @@ export default function RecipeId({ params }: getRecipeByIdProps) {
 								name="title"
 								className="text-2xl font-semibold text-body border p-1 rounded-md"
 								defaultValue={recipe.title}
+								required
 							/>
 						) : (
 							<h2 className="text-2xl font-semibold text-body">
@@ -121,6 +129,7 @@ export default function RecipeId({ params }: getRecipeByIdProps) {
 									className="text-base  font-semibold text-body border p-1 rounded-md"
 									defaultValue={recipe.ingredients}
 									name="ingredients"
+									required
 								/>
 							) : (
 								<p>{recipe.ingredients}</p>
@@ -133,6 +142,7 @@ export default function RecipeId({ params }: getRecipeByIdProps) {
 									className="text-base font-semibold text-body border p-1 rounded-md"
 									defaultValue={recipe.instructions}
 									name="instructions"
+									required
 								/>
 							) : (
 								<p>{recipe.instructions}</p>
@@ -153,9 +163,19 @@ export default function RecipeId({ params }: getRecipeByIdProps) {
 								</button>
 							)
 					)}
-					{recipe.map((recipe, index) => (
-						recipe.userId == id ? <button key={index} type="submit" className="btn-warning p-2 rounded-md">Atualize</button> : <></>
-					))}
+					{recipe.map((recipe, index) =>
+						recipe.userId == id ? (
+							<button
+								key={index}
+								type="submit"
+								className="btn-warning p-2 rounded-md"
+							>
+								Atualize
+							</button>
+						) : (
+							<></>
+						)
+					)}
 				</div>
 			</div>
 		</form>
